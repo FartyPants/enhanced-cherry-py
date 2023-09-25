@@ -12,6 +12,14 @@ Basically:
 - convert HF to GGUF
 - quantize the above GGUF to quantized GGUF
 
+### FPHAM Note: 
+
+I use the original llamacpp convert.py to go from hf to gguf 
+The convert-llama-hf-to-gguf.py in cherry produces gguf that fails to load in WebUI through llamacpp 
+
+
+Original:
+
 should be trivial to add more arguments if needed
 
 keep all files in same dir as 'convert_pipeline.py' then run `convert_pipeline.py` and follow prompts.
