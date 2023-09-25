@@ -15,7 +15,7 @@ Basically:
 ### FPHAM Note: 
 
 I use the original llamacpp convert.py to go from hf to gguf 
-The convert-llama-hf-to-gguf.py in cherry produces gguf that fails to load in WebUI through llamacpp 
+The convert-llama-hf-to-gguf.py in cherry produces gguf that fails to load in WebUI through llamacpp . Don't know why, don't have time to look at it so I grabbed convert.py
 
 
 Original:
