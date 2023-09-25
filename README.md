@@ -2,7 +2,8 @@
 
 consoldating llama.cpp scripts and quantize.exe for easy conversions
 
-## just run convert_pipeline.py
+## Easy Run
+python convert_pipeline.py
 and the input will guide you through
 
 
