@@ -16,6 +16,8 @@ import numpy as np
 import torch
 from sentencepiece import SentencePieceProcessor  # type: ignore[import]
 
+#import pyperclip
+
 if TYPE_CHECKING:
     from typing import TypeAlias
 
@@ -74,7 +76,10 @@ if args.outfile is not None:
     fname_out = args.outfile
 else:
     # output in the same directory as the model by default
-    fname_out = dir_model / f'ggml-model-{ftype_str[ftype]}.gguf'
+    # Split the path into directory and base parts
+    _, last_subfolder = os.path.split(dir_model)
+    fname_out = os.path.join(dir_model, f'{last_subfolder}-{ftype_str[ftype]}.gguf')
+    #fname_out = dir_model / f'ggml-model-{ftype_str[ftype]}.gguf'
 
 print("gguf: loading model "+dir_model.name)
 
@@ -275,6 +280,8 @@ if not args.vocab_only:
     gguf_writer.write_tensors_to_file()
 
 gguf_writer.close()
+#pyperclip.copy(fname_out)
 
-print(f"gguf: model successfully exported to '{fname_out}'")
+print(f"gguf: model successfully exported to:")
+print(f"{fname_out}")
 print("")
