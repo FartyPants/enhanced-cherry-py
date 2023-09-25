@@ -3,9 +3,14 @@
 consoldating llama.cpp scripts and quantize.exe for easy conversions
 
 ## Easy Run
+```
 python convert_pipeline.py
-and the input will guide you through
+```
+and the input will guide you through the rest
 
+Basically:
+- convert HF to GGUF
+- quantize the above GGUF to quantized GGUF
 
 should be trivial to add more arguments if needed
 
