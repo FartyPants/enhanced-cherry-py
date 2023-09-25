@@ -135,6 +135,30 @@ def hf_to_gguf():
 
     os.system(f"py convert.py {arg_list_hf[0]} --outtype f16 --outfile {fname_out}")
 
+def hf_to_gguf4():
+    arg_list_hf = ['hf_dir']
+    iter = -1
+    for arg in arg_list_hf:
+        iter = iter + 1
+        arg_list_hf[iter] = input(f"{arg}: ")
+
+    dir_model = arg_list_hf[0]
+
+    #if not dir_model.is_dir():
+    #    print(f'Error: {dir_model} is not a directory')
+    #    return
+
+    _, last_subfolder = os.path.split(dir_model)
+    last_subfolder = last_subfolder.replace("_HF", "")
+    last_subfolder = last_subfolder.replace(":", "")
+    if len(last_subfolder) < 3:
+        last_subfolder = 'llama-model'
+
+    fname_out = os.path.join(dir_model, f'{last_subfolder}-q8_0.gguf')
+
+    os.system(f"py convert.py {arg_list_hf[0]} --outtype q8_0 --outfile {fname_out}")
+
+
 def ggml_to_gguf():
     arg_list_ggml = ['ggml_file', 'output_file', 'metadata-dir']
     iter = -1
@@ -148,6 +172,7 @@ while True:
     print("'1': hf-to-gguf")
     print("'2': ggml-to-gguf")
     print("'3': quantize-gguf")
+    print("'4': Extra: hf to 8-bit gguf")
     print("'0': quit")
     convert_type = input(">>> ")
     if convert_type == "1":
@@ -156,6 +181,8 @@ while True:
         ggml_to_gguf()
     elif convert_type == "3":
         quant_gguf()
+    elif convert_type == "4":
+        hf_to_gguf4()        
     elif convert_type == "0":
         print("Exiting the program.")
         break
