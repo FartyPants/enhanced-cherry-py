@@ -118,7 +118,22 @@ def hf_to_gguf():
     for arg in arg_list_hf:
         iter = iter + 1
         arg_list_hf[iter] = input(f"{arg}: ")
-    os.system(f"py convert-llama-hf-to-gguf.py {arg_list_hf[0]} 1")
+
+    dir_model = arg_list_hf[0]
+
+    #if not dir_model.is_dir():
+    #    print(f'Error: {dir_model} is not a directory')
+    #    return
+
+    _, last_subfolder = os.path.split(dir_model)
+    last_subfolder = last_subfolder.replace("_HF", "")
+    last_subfolder = last_subfolder.replace(":", "")
+    if len(last_subfolder) < 3:
+        last_subfolder = 'llama-model'
+
+    fname_out = os.path.join(dir_model, f'{last_subfolder}-f16.gguf')
+
+    os.system(f"py convert.py {arg_list_hf[0]} --outtype f16 --outfile {fname_out}")
 
 def ggml_to_gguf():
     arg_list_ggml = ['ggml_file', 'output_file', 'metadata-dir']
