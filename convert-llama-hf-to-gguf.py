@@ -78,6 +78,11 @@ else:
     # output in the same directory as the model by default
     # Split the path into directory and base parts
     _, last_subfolder = os.path.split(dir_model)
+    last_subfolder = last_subfolder.replace("_HF", "")
+    last_subfolder = last_subfolder.replace(":", "")
+    if len(last_subfolder) < 3:
+        last_subfolder = 'llama-model'
+
     fname_out = os.path.join(dir_model, f'{last_subfolder}-{ftype_str[ftype]}.gguf')
     #fname_out = dir_model / f'ggml-model-{ftype_str[ftype]}.gguf'
 
